@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AppService {
-  constructor() {}
+  constructor(private readonly configs: ConfigService) {}
   getHello(): string {
-    return 'Hello World!' + process.env.JWT_SECRET;
+    return 'Hello World!' + this.configs.get<string>('database.host');
   }
 }

@@ -1,6 +1,5 @@
 import { Body, Controller, Get } from '@nestjs/common';
-import { log } from 'console';
-import { TokenService } from 'src/token/token.service';
+import { TokenService } from '../token/token.service';
 @Controller('auth')
 export class AuthController {
   constructor(private tokenService: TokenService) {}
