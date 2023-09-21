@@ -11,7 +11,7 @@ import {
 export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
-  @Column()
+  @Column({ name: 'r_name' })
   name!: string;
   @ManyToMany(() => Account, account => account.role)
   account: Account[];

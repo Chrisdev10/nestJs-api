@@ -1,11 +1,4 @@
-import { Subscription } from 'entities/subscription';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('adress')
 export class Adress extends BaseEntity {

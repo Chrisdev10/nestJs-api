@@ -16,9 +16,9 @@ import {
 export class Account extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
-  @Column()
+  @Column({ name: 'acc_username' })
   username!: string;
-  @Column()
+  @Column({ name: 'acc_password' })
   password!: string;
   @ManyToOne(() => Subscription, subscription => subscription.account)
   subscription: Subscription;

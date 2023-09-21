@@ -6,6 +6,6 @@ export default registerAs('database', () => ({
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  entities: ['./entities/*.entity{.ts,.js}'],
+  entities: [`${__dirname}/../entities/**/*.{js,ts}`],
   synchronize: true,
 }));
