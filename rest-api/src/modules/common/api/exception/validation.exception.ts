@@ -1,0 +1,16 @@
+import { HttpException, ValidationError } from '@nestjs/common';
+import { ApiCodeResponse } from '../response';
+
+export class ValidationException extends HttpException {
+  constructor(errors: ValidationError[]) {
+    console.log(errors);
+    super(
+      {
+        code: ApiCodeResponse.BAD_REQUEST,
+        data: errors.map(e => Object.values(e.constraints)).flat(),
+        result: false,
+      },
+      499,
+    );
+  }
+}
