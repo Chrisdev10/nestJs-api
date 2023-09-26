@@ -16,4 +16,9 @@ export class TokenService {
       secret: process.env.JWT_SECRET,
     });
   }
+  async verifyToken(token: string) {
+    return await this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
+  }
 }

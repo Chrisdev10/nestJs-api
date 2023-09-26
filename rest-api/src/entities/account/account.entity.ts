@@ -5,6 +5,7 @@ import { Role } from 'entities/role';
 import { Subscription } from 'entities/subscription';
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -18,11 +19,12 @@ import { ulid } from 'ulid';
 
 @Entity('account')
 export class Account extends BaseEntity {
-  @PrimaryColumn('varchar', {
-    length: 26,
-    default: () => `'${ulid()}'`,
-  })
+  @PrimaryColumn('varchar', { length: 26 })
   id: string;
+  @BeforeInsert()
+  generate() {
+    this.id = ulid();
+  }
   @Column({ name: 'acc_username', nullable: false, length: 25 })
   username!: string;
   @Column({ name: 'acc_password', nullable: false, length: 200 })

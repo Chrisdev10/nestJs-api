@@ -23,7 +23,7 @@ export class AccountService {
     if (resp) throw new AccountAlreadyExistException();
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(accountPayload.password, salt);
-    await this.accountRepo.save(
+    const obj = this.accountRepo.create(
       Builder<Account>()
         .username(accountPayload.username)
         .password(hash)
@@ -33,6 +33,7 @@ export class AccountService {
         })
         .build(),
     );
+    await this.accountRepo.save(obj);
     return await this.signin(accountPayload.username, accountPayload.password);
   }
   async signin(login: string, password: string) {
@@ -45,5 +46,14 @@ export class AccountService {
     if (bcrypt.compareSync(password, acc.password))
       return this.tokenService.getToken({ login, password });
     else throw new BadRequestException();
+  }
+  async removeAccount(username: string) {
+    const exist: number = (
+      await this.accountRepo.findAndCountBy({ username: username })
+    ).length;
+    if (!exist) throw new BadRequestException();
+    return (
+      (await this.accountRepo.delete({ username: username })).affected !== 0
+    );
   }
 }
