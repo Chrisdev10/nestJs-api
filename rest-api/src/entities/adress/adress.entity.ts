@@ -1,18 +1,11 @@
+import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
 import { Audit } from 'entities/audit/audit.properties';
+import { Fitness } from 'entities/fitness';
 import { Person } from 'entities/person';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, OneToOne } from 'typeorm';
 
 @Entity('adress')
-export class Adress extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
+export class Adress extends AbstractAutoIncEntity {
   @Column({ nullable: false, length: 40 })
   street!: string;
   @Column({ nullable: false })
@@ -23,7 +16,8 @@ export class Adress extends BaseEntity {
   country!: string;
   @Column(() => Audit)
   audit: Audit;
-  @ManyToOne(() => Adress, adress => adress.person)
-  @JoinColumn()
-  person: Person;
+  @ManyToMany(() => Adress, adress => adress.person)
+  person: Person[];
+  @OneToOne(() => Fitness)
+  fitness: Fitness;
 }

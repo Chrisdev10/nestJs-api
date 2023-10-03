@@ -3,4 +3,6 @@ export enum ApiCodeResponse {
   BAD_REQUEST = 'api.result.bad.req',
   INTERNAL_ERROR = 'api.result.error',
   UNAUTHORIZED = 'api.result.unauthorized',
+  TOKEN_INVALID = 'token.invalid.error',
+  TOKEN_NOT_FOUND = 'token.missing.error',
 }

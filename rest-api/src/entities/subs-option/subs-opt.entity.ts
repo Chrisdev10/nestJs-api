@@ -1,17 +1,9 @@
+import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
 import { Audit } from 'entities/audit/audit.properties';
 import { Subscription } from 'entities/subscription';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-} from 'typeorm';
-
+import { Column, Entity, ManyToMany } from 'typeorm';
 @Entity('subscriptionOptions')
-export class SubscriptionOptions extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
+export class SubscriptionOptions extends AbstractAutoIncEntity {
   @Column()
   name!: string;
   @Column()

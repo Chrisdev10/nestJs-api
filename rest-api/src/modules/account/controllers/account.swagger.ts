@@ -1,4 +1,8 @@
-import { ApiOperationOptions, ApiProperty } from '@nestjs/swagger';
+import {
+  ApiOperationOptions,
+  ApiProperty,
+  ApiResponseOptions,
+} from '@nestjs/swagger';
 export class AccountPayload {
   @ApiProperty()
   username: string;
@@ -9,7 +13,19 @@ export const AccountControllerSignup: ApiOperationOptions = {
   summary: 'Signup',
   description: 'Allow user to create an account',
 };
+export const AccountResponse200: ApiResponseOptions = {
+  status: '2XX',
+  description: 'return token',
+};
+export const AccountSignupResponse403: ApiResponseOptions = {
+  status: '4XX',
+  description: 'Account Already Exist Exception',
+};
 export const AccountControllerSignIn: ApiOperationOptions = {
   summary: 'SignIn',
   description: 'Allow user to log in an account',
+};
+export const AccountSigninResponse400: ApiResponseOptions = {
+  status: '4XX',
+  description: 'Account not found or wrong password',
 };

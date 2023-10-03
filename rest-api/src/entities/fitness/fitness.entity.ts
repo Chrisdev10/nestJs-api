@@ -1,26 +1,16 @@
+import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
 import { Adress } from 'entities/adress';
 import { Audit } from 'entities/audit/audit.properties';
 import { Subscription } from 'entities/subscription';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 @Entity('fitness')
-export class Fitness extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
+export class Fitness extends AbstractAutoIncEntity {
   @Column()
   capacity!: number;
   @Column()
   area!: number;
   @OneToOne(() => Adress)
-  @JoinColumn()
+  @JoinColumn({ name: 'fk_adress' })
   adress: Adress;
   @OneToMany(() => Subscription, subscription => subscription.account)
   subscription: Subscription[];

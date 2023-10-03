@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/database.config';
 import { CommonModule } from '@common/common.module';
 import { AccountModule } from 'modules/account/account.module';
+import { SubscriptionModule } from 'modules/subscription/subscription.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +21,7 @@ import { AccountModule } from 'modules/account/account.module';
     AuthModule,
     CommonModule,
     AccountModule,
+    SubscriptionModule,
   ],
   providers: [ConfigService],
 })

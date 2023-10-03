@@ -3,9 +3,9 @@ export class SignInPayload {
   @ApiProperty()
   username: string;
   @ApiProperty() password: string;
-  @ApiProperty() googleHash: string;
-  @ApiProperty() facebookHash: string;
-  @ApiProperty()
+  @ApiProperty({ required: false }) googleHash: string;
+  @ApiProperty({ required: false }) facebookHash: string;
+  @ApiProperty({ required: false })
   socialLogin: boolean;
 }
 export class SignUpPayload {

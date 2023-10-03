@@ -1,34 +1,37 @@
+import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
 import { Account } from 'entities/account';
 import { Adress } from 'entities/adress/adress.entity';
 import { Audit } from 'entities/audit/audit.properties';
 import {
-  BaseEntity,
   Column,
   Entity,
   JoinColumn,
-  OneToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity('person')
-export class Person extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
-  @Column()
+export class Person extends AbstractAutoIncEntity {
+  @Column({ nullable: false, length: 40 })
   lastname!: string;
-  @Column()
+  @Column({ nullable: false, length: 40 })
   firstname!: string;
-  @Column()
+  @Column({ nullable: false })
   birthdate!: Date;
-  @Column()
+  @Column({ nullable: false })
   email!: string;
   @Column()
   phone!: string;
   @OneToOne(() => Account)
-  @JoinColumn()
+  @JoinColumn({ name: 'fk_account' })
   account: Account;
-  @OneToMany(() => Adress, adress => adress.person)
+  @ManyToMany(() => Adress, adress => adress.person)
+  @JoinTable({
+    name: 'account_adress',
+    inverseJoinColumn: { referencedColumnName: 'id', name: 'fk_adress' },
+    joinColumn: { name: 'fk_person', referencedColumnName: 'id' },
+  })
   adress: Adress[];
   @Column(() => Audit)
   audit: Audit;

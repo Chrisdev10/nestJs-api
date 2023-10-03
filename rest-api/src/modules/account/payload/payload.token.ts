@@ -8,4 +8,6 @@ export class payloadJWT {
   @IsNotEmpty()
   @ApiProperty()
   password: string;
+  @ApiProperty()
+  roles?: string[];
 }

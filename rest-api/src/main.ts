@@ -6,7 +6,7 @@ import { ValidationError, ValidationPipe } from '@nestjs/common';
 import { ValidationException } from '@common/api/exception/validation.exception';
 import { ApiInterceptor } from '@common/interceptors/api.interceptor';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ApiInterceptor());
   app.useGlobalPipes(

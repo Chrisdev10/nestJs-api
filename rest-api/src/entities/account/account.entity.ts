@@ -1,11 +1,10 @@
 import { Exclude } from 'class-transformer';
+import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
 import { Audit } from 'entities/audit/audit.properties';
 import { Person } from 'entities/person/person.entity';
 import { Role } from 'entities/role';
 import { Subscription } from 'entities/subscription';
 import {
-  BaseEntity,
-  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -13,18 +12,10 @@ import {
   ManyToMany,
   ManyToOne,
   OneToOne,
-  PrimaryColumn,
 } from 'typeorm';
-import { ulid } from 'ulid';
 
 @Entity('account')
-export class Account extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  id: string;
-  @BeforeInsert()
-  generate() {
-    this.id = ulid();
-  }
+export class Account extends AbstractAutoIncEntity {
   @Column({ name: 'acc_username', nullable: false, length: 25 })
   username!: string;
   @Column({ name: 'acc_password', nullable: false, length: 200 })

@@ -1,17 +1,9 @@
+import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
 import { Account } from 'entities/account';
 import { Audit } from 'entities/audit/audit.properties';
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-
+import { Column, Entity, ManyToMany } from 'typeorm';
 @Entity('role')
-export class Role extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
+export class Role extends AbstractAutoIncEntity {
   @Column({ name: 'r_name' })
   name!: string;
   @ManyToMany(() => Account, account => account.role)
