@@ -1,15 +1,15 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { intersection, isNil, toUpper } from 'lodash';
-import { payloadJWT } from 'modules/account/payload/payload.token';
-import { TokenService } from 'modules/auth/token/token.service';
+import { JwtService } from '@nestjs/jwt';
+import { intersection, isEmpty, isNil, toUpper } from 'lodash';
+import { payloadJWT } from 'modules/token/payload/payload.token';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
-    private readonly tokenService: TokenService,
+    private readonly jwtService: JwtService,
   ) {}
   canActivate(
     context: ExecutionContext,
@@ -21,13 +21,15 @@ export class RoleGuard implements CanActivate {
       .trim();
     if (isNil(token)) return false;
     return (async () => {
-      const userRoles: payloadJWT = await this.tokenService.decodeJwt(token);
+      const userRoles: payloadJWT = await this.jwtService.verifyAsync(token, {
+        secret: process.env.JWT_SECRET,
+      });
       const handlerRoles: string[] = this.reflector.get<string[]>(
         'roles',
         context.getHandler(),
       );
-      if (!handlerRoles) return true;
-      if (!userRoles.roles) return false;
+      if (isEmpty(handlerRoles)) return true;
+      if (isNil(userRoles.roles)) return false;
       return (
         intersection(handlerRoles, [toUpper(...userRoles.roles)]).length !== 0
       );

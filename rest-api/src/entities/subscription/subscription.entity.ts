@@ -14,15 +14,15 @@ import {
 } from 'typeorm';
 @Entity('subscription')
 export class Subscription extends AbstractAutoIncEntity {
-  @Column()
+  @Column({ type: 'char' })
   type!: string;
-  @Column()
+  @Column({ type: 'char' })
   scope!: string;
   @Column({ default: true })
   actif: boolean;
   @Column()
   expiration!: Date;
-  @OneToMany(() => Account, account => account.subscription, { cascade: true })
+  @OneToMany(() => Account, account => account.subscription)
   account: Account[];
   @ManyToOne(() => Fitness, fitness => fitness.subscription)
   @JoinColumn()

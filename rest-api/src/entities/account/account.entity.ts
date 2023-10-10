@@ -21,12 +21,16 @@ export class Account extends AbstractAutoIncEntity {
   @Column({ name: 'acc_password', nullable: false, length: 200 })
   @Exclude({ toPlainOnly: true })
   password!: string;
-  @ManyToOne(() => Subscription, subscription => subscription.account)
+  @ManyToOne(() => Subscription, subscription => subscription.account, {
+    cascade: true,
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn({ name: 'fk_sub', referencedColumnName: 'id' })
   subscription: Subscription;
-  @OneToOne(() => Person)
+  @OneToOne(() => Person, { cascade: ['insert', 'update'], eager: true })
+  @JoinColumn({ name: 'fk_person' })
   person: Person;
-  @ManyToMany(() => Role, role => role.account)
+  @ManyToMany(() => Role, role => role.account, { eager: true })
   @JoinTable({
     name: 'account_role',
     inverseJoinColumn: { referencedColumnName: 'id', name: 'fk_role' },

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TestService } from './test.service';
 
 @Component({
@@ -9,7 +9,10 @@ import { TestService } from './test.service';
 export class AppComponent {
   title = 'angular-projet';
   constructor(private readonly test: TestService) {}
-  testCall() {
+  // @HostListener('window:click')
+  testCall(event: any) {
+    console.log(event);
+
     this.test.firstTest('admin', 'admin');
   }
 }

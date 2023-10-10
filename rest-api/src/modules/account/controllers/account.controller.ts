@@ -10,11 +10,12 @@ import {
 import {
   AccountControllerSignIn,
   AccountControllerSignup,
+  AccountDeleteResponse404,
   AccountResponse200,
   AccountSigninResponse400,
   AccountSignupResponse403,
-} from './account.swagger';
-import { SignInPayload } from '../payload';
+} from '../documentation/account.swagger';
+import { SignInPayload, SignUpFullPayload } from '../payload';
 import { Auth } from '@common/decorators/roles.decorator';
 @ApiBearerAuth('access-token')
 @ApiTags('Account')
@@ -28,6 +29,13 @@ export class AccountController {
   async signup(@Body() accountPayload: SignInPayload) {
     return this.accountService.signup(accountPayload);
   }
+  @ApiOperation(AccountControllerSignup)
+  @ApiResponse(AccountResponse200)
+  @ApiResponse(AccountSignupResponse403)
+  @Post('info')
+  async signupWithInfo(@Body() accountPayload: SignUpFullPayload) {
+    return this.accountService.signupWithInfo(accountPayload);
+  }
   @ApiOperation(AccountControllerSignIn)
   @ApiResponse(AccountSigninResponse400)
   @ApiResponse(AccountResponse200)
@@ -35,6 +43,7 @@ export class AccountController {
   async signin(@Query('login') login: string, @Query('pwd') pwd: string) {
     return this.accountService.signin(login, pwd);
   }
+  @ApiResponse(AccountDeleteResponse404)
   @Auth('ADMIN')
   @Delete(':username')
   async removeAccountByUsername(@Param('username') username: string) {

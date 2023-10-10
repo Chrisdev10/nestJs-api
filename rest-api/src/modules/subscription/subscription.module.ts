@@ -4,11 +4,11 @@ import { Repository } from 'typeorm';
 import { Account, Subscription } from 'entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SubscriptionService } from './services/subscription.service';
-import { TokenModule } from 'modules/auth/token/token.module';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Account, Subscription]), TokenModule],
+  imports: [TypeOrmModule.forFeature([Account, Subscription])],
   controllers: [SubscriptionController],
-  providers: [Repository<Subscription>, SubscriptionService],
+  providers: [Repository<Subscription>, SubscriptionService, JwtService],
 })
 export class SubscriptionModule {}

@@ -1,9 +1,9 @@
-import { Column } from 'typeorm';
+import { Column, CreateDateColumn } from 'typeorm';
 
 export class Audit {
   @Column({ name: 'createdBy' })
   createdBy: string;
-  @Column({
+  @CreateDateColumn({
     name: 'createdOn',
   })
   createdOn: Date;

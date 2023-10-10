@@ -10,7 +10,7 @@ import { Auth } from '@common/decorators/roles.decorator';
 export class SubscriptionController {
   constructor(private readonly subService: SubscriptionService) {}
   @Post()
-  @Auth()
+  @Auth('USER', 'ADMIN')
   async createSubs(@Body() payload: SubscriptionPayload): Promise<Account> {
     return this.subService.createSubscription(payload);
   }
@@ -21,7 +21,7 @@ export class SubscriptionController {
   }
   @Post(':id')
   @Auth('ADMIN')
-  async disableSubscription(@Param() id: string): Promise<boolean> {
+  async disableSubscription(@Param('id') id: string): Promise<boolean> {
     return await this.subService.removeSubscription(id);
   }
 }

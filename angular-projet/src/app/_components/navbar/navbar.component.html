@@ -1,0 +1,18 @@
+<nav id="navbar" class="navbar">
+    <div class="navbar__container">
+        <div class="slider" [ngClass]="collapse ? '' : 'collapser'">
+          
+            <a class="items" href="#"><li>Home</li></a>
+            <a class="items" href="#"><li>FAQ</li></a>
+            <a class="items" href="#"><li>About us</li></a>
+            <a href="#"><button class="navbar__btn">My Account</button></a>
+            
+        </div>
+        <ul [ngClass]="collapse ? 'collapser' : ''" class="navbar__list">
+            <a class="items" href="#"><li>Home</li></a>
+            <a class="items" href="#"><li>FAQ</li></a>
+            <a class="items" href="#"><li>About us</li></a>
+            <a href="#"><button class="navbar__btn">My Account</button></a>
+        </ul>
+    </div>
+</nav>

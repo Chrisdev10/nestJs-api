@@ -24,7 +24,6 @@ export class Person extends AbstractAutoIncEntity {
   @Column()
   phone!: string;
   @OneToOne(() => Account)
-  @JoinColumn({ name: 'fk_account' })
   account: Account;
   @ManyToMany(() => Adress, adress => adress.person)
   @JoinTable({

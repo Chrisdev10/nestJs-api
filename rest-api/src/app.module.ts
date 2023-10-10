@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthModule } from './modules/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/database.config';
 import { CommonModule } from '@common/common.module';
 import { AccountModule } from 'modules/account/account.module';
 import { SubscriptionModule } from 'modules/subscription/subscription.module';
+import { TokenModule } from 'modules/token/token.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,10 +18,10 @@ import { SubscriptionModule } from 'modules/subscription/subscription.module';
       }),
       inject: [ConfigService],
     }),
-    AuthModule,
     CommonModule,
     AccountModule,
     SubscriptionModule,
+    TokenModule,
   ],
   providers: [ConfigService],
 })

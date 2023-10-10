@@ -29,3 +29,7 @@ export const AccountSigninResponse400: ApiResponseOptions = {
   status: '4XX',
   description: 'Account not found or wrong password',
 };
+export const AccountDeleteResponse404: ApiResponseOptions = {
+  status: '4XX',
+  description: 'Account not found',
+};

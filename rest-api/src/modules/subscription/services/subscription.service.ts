@@ -1,7 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Account, Subscription } from 'entities';
 import { Repository } from 'typeorm';
-import { SubscriptionPayload } from '../payload/subscription.payload';
+import {
+  SubScope,
+  SubType,
+  SubscriptionPayload,
+} from '../payload/subscription.payload';
 import { Builder } from 'builder-pattern';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -18,9 +22,11 @@ export class SubscriptionService {
     if (!acc) throw new NotFoundException();
     const sub = this.subsrepo.create(
       Builder<Subscription>()
-        .type(payload.type)
+        .type(SubType[payload.type] === 'P' ? SubType.PREMIUM : SubType.NORMAL)
         .expiration(new Date())
-        .scope('global')
+        .scope(
+          SubScope[payload.scope] === 'G' ? SubScope.GLOBAL : SubScope.SIMPLE,
+        )
         .audit({
           createdBy: acc.username,
           createdOn: new Date(),

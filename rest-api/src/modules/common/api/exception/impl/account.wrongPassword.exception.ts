@@ -3,10 +3,6 @@ import { ApiException } from '../api-exception';
 
 export class AccountWrongPassword extends ApiException {
   constructor() {
-    super(
-      ApiCodeResponse.BAD_REQUEST,
-      402,
-      'Account not found in our database',
-    );
+    super(ApiCodeResponse.ACCOUNT_WRONG_PWD, 402, 'Wrong password');
   }
 }
