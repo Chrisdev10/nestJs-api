@@ -15,7 +15,7 @@ import {
   AccountSigninResponse400,
   AccountSignupResponse403,
 } from '../documentation/account.swagger';
-import { SignInPayload, SignUpFullPayload } from '../payload';
+import { SignInPayload, SignUpFullPayload } from '../models/payload';
 import { Auth } from '@common/decorators/roles.decorator';
 @ApiBearerAuth('access-token')
 @ApiTags('Account')

@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { SubscriptionPayload } from '../payload/subscription.payload';
+import { SubscriptionPayload } from '../models/payload/subscription.payload';
 import { SubscriptionService } from '../services/subscription.service';
 import { Account, Subscription } from 'entities';
 import { Auth } from '@common/decorators/roles.decorator';

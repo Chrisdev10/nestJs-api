@@ -3,7 +3,7 @@ import { Account, Person } from 'entities';
 import { Repository } from 'typeorm';
 import { Builder } from 'builder-pattern';
 import { InjectRepository } from '@nestjs/typeorm';
-import { SignInPayload, SignUpFullPayload } from '../payload';
+import { SignInPayload, SignUpFullPayload } from '../models/payload';
 import { AccountAlreadyExistException } from '@common/api/exception/impl/account.exist.exception';
 import { AccountNotFoundException } from '@common/api/exception/impl/account.notFound.exception';
 import { AccountWrongPassword } from '@common/api/exception/impl/account.wrongPassword.exception';
@@ -11,7 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { payloadJWT } from '../../token/payload/payload.token';
 import { RolesService } from './roles.service';
 import { pwdChecker, pwdHashing } from '@common/utils';
-import { Audit } from 'entities/audit';
+import { Audit } from '@common/models/entity/audit';
 @Injectable()
 export class AccountService {
   private readonly myLogger = new Logger(AccountService.name);

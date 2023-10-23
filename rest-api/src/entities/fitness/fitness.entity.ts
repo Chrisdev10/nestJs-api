@@ -1,7 +1,6 @@
-import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
-import { Adress } from 'entities/adress';
-import { Audit } from 'entities/audit/audit.properties';
-import { Subscription } from 'entities/subscription';
+import { AbstractAutoIncEntity } from '@common/models/entity/abstractAutoIncEntity.entities';
+import { Adress } from '@common/models/entity/adress';
+import { Subscription } from 'modules/subscription/models/entity/subscription';
 import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 @Entity('fitness')
 export class Fitness extends AbstractAutoIncEntity {
@@ -14,6 +13,4 @@ export class Fitness extends AbstractAutoIncEntity {
   adress: Adress;
   @OneToMany(() => Subscription, subscription => subscription.account)
   subscription: Subscription[];
-  @Column(() => Audit)
-  audit: Audit;
 }

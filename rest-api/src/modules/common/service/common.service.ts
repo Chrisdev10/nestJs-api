@@ -1,4 +1,4 @@
-import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
+import { AbstractAutoIncEntity } from '@common/models/entity/abstractAutoIncEntity.entities';
 import { Repository } from 'typeorm';
 
 export abstract class CommonService<E extends AbstractAutoIncEntity> {

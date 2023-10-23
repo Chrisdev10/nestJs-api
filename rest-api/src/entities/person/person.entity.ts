@@ -1,15 +1,7 @@
-import { AbstractAutoIncEntity } from 'entities/abstractAutoIncEntity.entities';
-import { Account } from 'entities/account';
-import { Adress } from 'entities/adress/adress.entity';
-import { Audit } from 'entities/audit/audit.properties';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { AbstractAutoIncEntity } from '@common/models/entity/abstractAutoIncEntity.entities';
+import { Account } from '@common/models/entity/account';
+import { Adress } from '@common/models/entity/adress/adress.entity';
+import { Column, Entity, OneToOne, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity('person')
 export class Person extends AbstractAutoIncEntity {
@@ -32,6 +24,4 @@ export class Person extends AbstractAutoIncEntity {
     joinColumn: { name: 'fk_person', referencedColumnName: 'id' },
   })
   adress: Adress[];
-  @Column(() => Audit)
-  audit: Audit;
 }
