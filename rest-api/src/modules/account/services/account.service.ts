@@ -7,18 +7,18 @@ import { SignInPayload, SignUpFullPayload } from '../models/payload';
 import { AccountAlreadyExistException } from '@common/api/exception/impl/account.exist.exception';
 import { AccountNotFoundException } from '@common/api/exception/impl/account.notFound.exception';
 import { AccountWrongPassword } from '@common/api/exception/impl/account.wrongPassword.exception';
-import { JwtService } from '@nestjs/jwt';
 import { payloadJWT } from '../../token/payload/payload.token';
 import { RolesService } from './roles.service';
 import { pwdChecker, pwdHashing } from '@common/utils';
 import { Audit } from '@common/models/entity/audit';
+import { TokenService } from 'modules/token/services/token.service';
 @Injectable()
 export class AccountService {
   private readonly myLogger = new Logger(AccountService.name);
   constructor(
     @InjectRepository(Account)
     private readonly accountRepo: Repository<Account>,
-    private readonly jwtService: JwtService,
+    private readonly tokenService: TokenService,
     private readonly roleService: RolesService,
   ) {}
   async signupWithInfo(accountFullPayload: SignUpFullPayload): Promise<any> {
@@ -46,8 +46,6 @@ export class AccountService {
         .audit(Builder<Audit>().createdBy(accountFullPayload.username).build())
         .build(),
     );
-    console.log(obj);
-
     await this.accountRepo.save(obj);
     return await this.signin(
       accountFullPayload.username,
@@ -84,13 +82,7 @@ export class AccountService {
         password: acc.password,
         roles: acc.role?.map(x => x.name),
       };
-      return {
-        account: acc,
-        token: await this.jwtService.signAsync(payload, {
-          secret: process.env.JWT_SECRET,
-          expiresIn: process.env.JWT_EXPIRES,
-        }),
-      };
+      return { account: acc, auth: await this.tokenService.getToken(payload) };
     } else throw new AccountWrongPassword();
   }
   async getAccountByLogin(username: string): Promise<Account> {

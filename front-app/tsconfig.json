@@ -7,8 +7,11 @@
     "paths":{
       "@Security" : ["src/app/root/security/index.ts"],
       "@Shared" : ["src/app/root/shared/index.ts"],
-      "@Root" : ["src/app/root/index"],
-      "@Dashboard" : ["src/app/root/index"],
+      "@Root" : ["src/app/root/index.ts"],
+      "@Dashboard" : ["src/app/root/index.ts"],
+      "@env" : ["src/environments/index.ts"],
+      "@models": ["src/app/root/shared/api/models/index.ts"]
+
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
