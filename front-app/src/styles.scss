@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+body, html, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+// Main colors
+$carnation-pink: #ff99c9ff;
+$periwinkle: #c1bddbff;
+$powder-blue: #a2c7e5ff;
+$fluorescent-cyan: #58fcecff;
+$black-olive: #303a2bff;
+
+// transition
+
+$transition-smooth: all ease .3s;

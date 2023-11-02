@@ -10,7 +10,7 @@
       "@Root" : ["src/app/root/index.ts"],
       "@Dashboard" : ["src/app/root/index.ts"],
       "@env" : ["src/environments/index.ts"],
-      "@models": ["src/app/root/shared/api/models/index.ts"]
+      "@Shared/api": ["src/app/root/shared/api/index.ts", "src/app/root/shared/api/models"]
 
     },
     "forceConsistentCasingInFileNames": true,

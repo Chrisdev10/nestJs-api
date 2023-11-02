@@ -1,0 +1,27 @@
+@import "../../../../../styles.scss";
+.signin-form{
+    width: 500px;
+    height: 500px;
+    margin: 10rem auto;
+    border: 1px solid $powder-blue;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+button {
+    padding: 0.3rem;
+    display: block;
+    font-size: medium;
+    margin: 1rem auto;
+    background-color: $fluorescent-cyan;
+    color: $black-olive;
+    border: 0;
+    border-radius: 5px;
+    transition: $transition-smooth;
+    &:hover{
+        transform: scale(1.1);
+        background-color: $powder-blue;
+    }
+}

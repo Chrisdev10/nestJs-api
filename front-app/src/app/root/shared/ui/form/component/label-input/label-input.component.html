@@ -1,0 +1,4 @@
+<div class="input">
+    <label class="floating-label" [ngClass]="{'onFocusLabel': inputFocus || control.value.length > 0}">{{label}}</label>
+    <input class="floating-input" [ngClass]="{'onFocusInput': inputFocus}" type="text" placeholder=" " (focus)="inputFocus=true" (blur)="inputFocus=false" autocomplete="new-password" [formControl]="control">
+</div>
