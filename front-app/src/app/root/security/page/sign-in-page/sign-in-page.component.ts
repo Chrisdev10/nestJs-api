@@ -1,15 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputComponent } from 'src/app/root/shared';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SignInForm } from '../../data/form';
-import { LabelInputComponent } from 'src/app/root/shared/ui/form/component/label-input/label-input.component';
-import { ApiService } from 'src/app/root/shared/api/services';
+import { SignInForm } from '@Security';
+import {
+  LabelInputComponent,
+  FormError,
+  handleFormError,
+  InputComponent,
+} from '@Shared';
+import { ApiService, ConcatPipe } from '@Shared/api';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -19,14 +24,17 @@ import { ApiService } from 'src/app/root/shared/api/services';
     InputComponent,
     LabelInputComponent,
     ReactiveFormsModule,
+    TranslateModule,
+    ConcatPipe,
   ],
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.scss'],
 })
 export class SignInPageComponent {
   formGroup: FormGroup;
+  errors: WritableSignal<FormError[]> = signal([]);
   userNameLabel: string = 'username';
-  passwordLabel: string = 'mots de passe';
+  passwordLabel: string = 'password';
   private readonly api: ApiService = inject(ApiService);
   constructor() {
     this.formGroup = new FormGroup<SignInForm>(<SignInForm>{
@@ -37,10 +45,12 @@ export class SignInPageComponent {
       ]),
       password: new FormControl<string>('', [Validators.required]),
     });
+    handleFormError(this.formGroup, this.errors);
   }
   get(key: string): FormControl<any> {
     return this.formGroup.get(key)! as FormControl<any>;
   }
+
   onSubmit() {
     this.api
       .get(

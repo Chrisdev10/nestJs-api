@@ -1,9 +1,3 @@
-body, html, *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
 // Main colors
 $carnation-pink: #ff99c9ff;
 $periwinkle: #c1bddbff;
@@ -14,3 +8,10 @@ $black-olive: #303a2bff;
 // transition
 
 $transition-smooth: all ease .3s;
+
+body, html, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

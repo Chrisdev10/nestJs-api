@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Language } from '@Shared';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,11 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'front-app';
+  translate = inject(TranslateService);
+  ngOnInit(): void {
+    this.translate.setDefaultLang(Language.EN);
+    this.translate.use(Language.EN);
+  }
 }

@@ -4,25 +4,33 @@ import {
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
-import { EMPTY, Observable, catchError, map, switchMap, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, switchMap, tap } from 'rxjs';
 import { environment } from '@env';
 import { inject } from '@angular/core';
-import { ApiService, TokenService } from '../services';
 import { Router } from '@angular/router';
-import { AppNode } from '../../routes/enum/node.enum';
+import { AppNode } from '@Shared';
 import {
   AddTokenHeaderFn,
   HttpInterceptorCommonErrorHandlerFn,
   HttpInterceptorHandlerFn,
 } from '../type';
-import { ApiURI } from '../enum';
+import { ApiURI, ApiService, TokenService } from '@Shared/api';
 import { ApiResponse } from '../models/api-response';
 import { Token } from '@Shared/api';
 const baseURL: string = environment.apiURL;
-const publicRoute: string[] = [baseURL, `${baseURL}token`, `${baseURL}account`];
+const publicRoute: string[] = [
+  baseURL,
+  `${baseURL}token`,
+  `${baseURL}account`,
+  './assets/i18n/fr.json',
+  './assets/i18n/eb.json',
+];
 export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
-  const cleanedURL = req.url.slice(0, req.url.indexOf('?'));
-  if (publicRoute.includes(cleanedURL)) {
+  if (!req.url.match(`${baseURL}*`)) {
+    req.url.match(`${baseURL}*`);
+    return next(req);
+  }
+  if (publicRoute.includes(req.url.slice(0, req.url.indexOf('?')))) {
     return next(req);
   }
   //if route is not public

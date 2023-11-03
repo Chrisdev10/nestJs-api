@@ -1,0 +1,9 @@
+{
+    "security-feature.sign-in-page.label.username": "Username", 
+    "security-feature.sign-in-page.label.password": "Password", 
+    "security-feature.sign-in-page.error.username-required": "Username is required", 
+    "security-feature.sign-in-page.error.password-required": "Password is required",
+    "security-feature.sign-in-page.error.description": "{count, plural, =0{No error} one{You have one error} other{You have {count} errors}}.",
+    "security-feature.sign-in-page.login": "Login",
+    "security-feature.sign-in-page.sign-in": "Sign in"
+}

@@ -15,7 +15,8 @@
           "standalone": true
         },
         "@schematics/angular:pipe": {
-          "standalone": true
+          "standalone": true,
+          "skipTests": true
         },
         "@schematics/angular:service": {
           "skipTests": true

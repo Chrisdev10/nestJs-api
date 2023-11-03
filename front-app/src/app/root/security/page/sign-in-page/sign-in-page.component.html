@@ -1,8 +1,12 @@
 <div class="signin-form">
-    <h2>Sign In</h2>
+    <h2>{{ 'security-feature.sign-in-page.sign-in' | translate }}</h2>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <div class="error-area" *ngIf="errors().length >0">
+        <p>{{'security-feature.sign-in-page.error.description' | translate: {count: errors().length} }}</p>
+        <p *ngFor="let error of errors()">{{'security-feature.sign-in-page.error.' | concat: error | translate}}</p> 
+      </div>
       <app-label-input [control]="get('username')" [label]="userNameLabel"></app-label-input>
       <app-label-input [control]="get('password')" [label]="passwordLabel"></app-label-input>
-      <button type="submit">Submit</button>
+      <button type="submit">{{ 'security-feature.sign-in-page.login' | translate }}</button>
     </form>
-  </div>
+</div>
