@@ -1,30 +1,12 @@
-import {
-  HttpErrorResponse,
-  HttpHandlerFn,
-  HttpInterceptorFn,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { EMPTY, Observable, catchError, switchMap, tap } from 'rxjs';
 import { environment } from '@env';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppNode } from '@Shared';
-import {
-  AddTokenHeaderFn,
-  HttpInterceptorCommonErrorHandlerFn,
-  HttpInterceptorHandlerFn,
-} from '../type';
-import { ApiURI, ApiService, TokenService } from '@Shared/api';
-import { ApiResponse } from '../models/api-response';
-import { Token } from '@Shared/api';
+import { ApiURI, ApiResponse, ApiService, TokenService, AddTokenHeaderFn, HttpInterceptorCommonErrorHandlerFn, HttpInterceptorHandlerFn, Token } from '@Shared/api';
 const baseURL: string = environment.apiURL;
-const publicRoute: string[] = [
-  baseURL,
-  `${baseURL}token`,
-  `${baseURL}account`,
-  './assets/i18n/fr.json',
-  './assets/i18n/eb.json',
-];
+const publicRoute: string[] = [baseURL, `${baseURL}token`, `${baseURL}account`, './assets/i18n/fr.json', './assets/i18n/eb.json'];
 export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.match(`${baseURL}*`)) {
     req.url.match(`${baseURL}*`);
@@ -38,36 +20,20 @@ export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
   const router: Router = inject(Router);
   if (!tokenService.token$().isEmpty) {
     const api: ApiService = inject(ApiService);
-    return next(setTokenInHeader(req, tokenService.token$().token)).pipe(
-      catchError((err: HttpErrorResponse) =>
-        handleError(err, req, next, tokenService, router, api)
-      )
-    );
+    return next(setTokenInHeader(req, tokenService.token$().token)).pipe(catchError((err: HttpErrorResponse) => handleError(err, req, next, tokenService, router, api)));
   }
   return redirectToPublic(router);
 };
-const setTokenInHeader: AddTokenHeaderFn = (
-  req: HttpRequest<any>,
-  token: string
-): HttpRequest<any> => {
+const setTokenInHeader: AddTokenHeaderFn = (req: HttpRequest<any>, token: string): HttpRequest<any> => {
   return req.clone({
     headers: req.headers.set('Authorization', `Bearer ${token}`),
   });
 };
-const redirectToPublic: (router: Router) => Observable<any> = (
-  router: Router
-) => {
+const redirectToPublic: (router: Router) => Observable<any> = (router: Router) => {
   router.navigate([AppNode.REDIRECT_TO_PUBLIC]).then();
   return EMPTY;
 };
-const handleError: HttpInterceptorHandlerFn = (
-  err: HttpErrorResponse,
-  req: HttpRequest<any>,
-  next: HttpHandlerFn,
-  tokenService: TokenService,
-  router: Router,
-  api: ApiService
-): Observable<any> => {
+const handleError: HttpInterceptorHandlerFn = (err: HttpErrorResponse, req: HttpRequest<any>, next: HttpHandlerFn, tokenService: TokenService, router: Router, api: ApiService): Observable<any> => {
   if (err.status === 401 || err.status === 403) {
     //but before refresh it , we must try to see if refresh token exit.. in theory yes because we can be here if token.isEmpty
     if (!tokenService.token$().isEmpty) {
@@ -101,8 +67,6 @@ const handleError: HttpInterceptorHandlerFn = (
   // Here we can show something to client? Maybe a toaster or ....
   return handleCommonError(err);
 };
-const handleCommonError: HttpInterceptorCommonErrorHandlerFn = (
-  err: HttpErrorResponse
-): Observable<any> => {
+const handleCommonError: HttpInterceptorCommonErrorHandlerFn = (err: HttpErrorResponse): Observable<any> => {
   throw err;
 };
