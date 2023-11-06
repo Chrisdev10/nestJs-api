@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { TokenService } from '../services/token.service';
 import { payloadJWT } from '../payload/payload.token';
 
@@ -12,5 +12,9 @@ export class TokenController {
   @Get(':token')
   decodeToken(@Param('token') token: string) {
     return this.tokenService.decodeJwt(token);
+  }
+  @Post('refresh')
+  refreshToken(@Query('token') token: string) {
+    return this.tokenService.refreshToken(token);
   }
 }

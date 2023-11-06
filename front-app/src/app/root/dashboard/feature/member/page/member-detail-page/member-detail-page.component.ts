@@ -18,8 +18,9 @@ export class MemberDetailPageComponent {
   constructor(private readonly router: Router, private readonly apiService: ApiService) {
     const id: string = this.router.url.slice(this.router.url.lastIndexOf('/') + 1);
     if (isNil(id)) this.router.navigate(['']);
-    this.apiService.get(`account/${id}`).subscribe(data => {
-      this.memberInfo = data.data.person;
+    this.apiService.get(`account/${id}`).subscribe({
+      next: data => (this.memberInfo = data.data.person),
+      error: err => console.log(err),
     });
   }
 }

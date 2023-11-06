@@ -38,22 +38,22 @@ const handleError: HttpInterceptorHandlerFn = (err: HttpErrorResponse, req: Http
     //but before refresh it , we must try to see if refresh token exit.. in theory yes because we can be here if token.isEmpty
     if (!tokenService.token$().isEmpty) {
       return api
-        .post(ApiURI.REFRESH_TOKEN, {
+        .post(ApiURI.REFRESH_TOKEN + '?token=' + tokenService.token$().refreshToken, {
           refresh: tokenService.token$().refreshToken,
         })
         .pipe(
           switchMap((result: ApiResponse) => {
-            if (result.result) {
+            if (result.data) {
               //Finally if we get new token, we retry
               return next(setTokenInHeader(req, result.data.token)).pipe(
                 catchError((err: HttpErrorResponse) => handleCommonError(err)),
                 // if we pass here, that's mean we don't have error otherwise we go to
-                tap(() =>
+                tap(() => {
                   tokenService.setToken({
                     ...(result.data as Token),
                     isEmpty: false,
-                  })
-                )
+                  });
+                })
               );
             }
             return redirectToPublic(router);
@@ -68,5 +68,7 @@ const handleError: HttpInterceptorHandlerFn = (err: HttpErrorResponse, req: Http
   return handleCommonError(err);
 };
 const handleCommonError: HttpInterceptorCommonErrorHandlerFn = (err: HttpErrorResponse): Observable<any> => {
+  console.log('errror');
+
   throw err;
 };
