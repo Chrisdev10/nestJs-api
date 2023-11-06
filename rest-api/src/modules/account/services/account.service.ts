@@ -25,9 +25,9 @@ export class AccountService {
     const resp: Account = await this.accountRepo.findOneBy({
       username: accountFullPayload.username,
     });
-    if (resp) throw new AccountAlreadyExistException();
     const obj = this.accountRepo.create(
       Builder<Account>()
+        .id(resp ? resp.id : null)
         .username(accountFullPayload.username)
         .password(await pwdHashing(accountFullPayload.password))
         .person(
@@ -37,9 +37,7 @@ export class AccountService {
             .birthdate(accountFullPayload.birthDate)
             .email(accountFullPayload.email)
             .phone(accountFullPayload.phone)
-            .audit(
-              Builder<Audit>().createdBy(accountFullPayload.username).build(),
-            )
+            .audit(Builder<Audit>().createdBy(accountFullPayload.username).build())
             .build(),
         )
         .role(await this.roleService.getRoleByName('USER'))
@@ -47,10 +45,7 @@ export class AccountService {
         .build(),
     );
     await this.accountRepo.save(obj);
-    return await this.signin(
-      accountFullPayload.username,
-      accountFullPayload.password,
-    );
+    return await this.signin(accountFullPayload.username, accountFullPayload.password);
   }
   async signup(accountPayload: SignInPayload): Promise<any> {
     const resp: Account = await this.accountRepo.findOneBy({
@@ -82,19 +77,22 @@ export class AccountService {
         password: acc.password,
         roles: acc.role?.map(x => x.name),
       };
-      return { account: acc, auth: await this.tokenService.getToken(payload) };
+      return { id: acc.id, auth: await this.tokenService.getToken(payload) };
     } else throw new AccountWrongPassword();
+  }
+  async getUserInfo(id: string) {
+    const acc: Account = await this.accountRepo.findOneBy({ id: id });
+    if (!acc) {
+      throw new AccountNotFoundException();
+    }
+    return acc;
   }
   async getAccountByLogin(username: string): Promise<Account> {
     return await this.accountRepo.findOneBy({ username: username });
   }
   async removeAccount(username: string) {
-    const exist: number = (
-      await this.accountRepo.findAndCountBy({ username: username })
-    ).length;
+    const exist: number = (await this.accountRepo.findAndCountBy({ username: username })).length;
     if (!exist) throw new AccountNotFoundException();
-    return (
-      (await this.accountRepo.delete({ username: username })).affected !== 0
-    );
+    return (await this.accountRepo.delete({ username: username })).affected !== 0;
   }
 }

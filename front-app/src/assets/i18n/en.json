@@ -5,5 +5,12 @@
     "security-feature.sign-in-page.error.password-required": "Password is required",
     "security-feature.sign-in-page.error.description": "{count, plural, =0{No error} one{You have one error} other{You have {count} errors}}.",
     "security-feature.sign-in-page.login": "Login",
-    "security-feature.sign-in-page.sign-in": "Sign in"
+    "security-feature.sign-in-page.sign-in": "Sign in",
+
+    "dashboard-feature.member.title": "User information",
+    "dashboard-feature.member.lastname": "last name",
+    "dashboard-feature.member.firstname": "first name",
+    "dashboard-feature.member.email": "email",
+    "dashboard-feature.member.phone": "phone number",
+    "dashboard-feature.member.ddn": "birthdate"
 }

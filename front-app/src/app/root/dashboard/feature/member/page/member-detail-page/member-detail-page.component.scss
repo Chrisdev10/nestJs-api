@@ -1,0 +1,22 @@
+@import "src/styles";
+.memberinfo{
+    width: 50%;
+    height: 50%;
+    margin: 4rem auto;
+    padding: 1rem;
+    border: 1px solid $powder-blue;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    & > h3 {
+        align-self: center;
+    }
+    & > ul {
+        list-style: none;
+        & > li > span {
+            font-weight: bold;
+        }
+    }
+}

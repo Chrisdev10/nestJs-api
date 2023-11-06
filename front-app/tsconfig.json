@@ -8,9 +8,9 @@
       "@Security" : ["src/app/root/security/index.ts"],
       "@Shared" : ["src/app/root/shared/index.ts"],
       "@Root" : ["src/app/root/index.ts"],
-      "@Dashboard" : ["src/app/root/index.ts"],
       "@env" : ["src/environments/index.ts"],
-      "@Shared/api": ["src/app/root/shared/api/index.ts", "src/app/root/shared/api/models"]
+      "@Shared/api": ["src/app/root/shared/api/index.ts", "src/app/root/shared/api/models"],
+      "@Dashboard": ["src/app/root/dashboard/index.ts"],
 
     },
     "forceConsistentCasingInFileNames": true,

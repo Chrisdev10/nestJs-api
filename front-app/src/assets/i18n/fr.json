@@ -5,5 +5,13 @@
     "security-feature.sign-in-page.error.password-required": "Le Mot de passe est requis",
     "security-feature.sign-in-page.error.description": "{count, plural, =0{Vous n'avez pas d'erreur} one{Vous avez une erreur} other{Vous avez {count} erreurs}}.",
     "security-feature.sign-in-page.login": "connecter",
-    "security-feature.sign-in-page.sign-in": "Se connecter"
+    "security-feature.sign-in-page.sign-in": "Se connecter",
+
+    "dashboard-feature.member.title": "Info utilisateur",
+    "dashboard-feature.member.lastname": "nom",
+    "dashboard-feature.member.firstname": "prénom",
+    "dashboard-feature.member.email": "email",
+    "dashboard-feature.member.phone": "numéro de téléphone",
+    "dashboard-feature.member.ddn": "date de naissance"
+    
 }

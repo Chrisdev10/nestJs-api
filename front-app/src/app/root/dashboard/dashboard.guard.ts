@@ -1,10 +1,13 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { isEmpty, isNil } from 'lodash';
+import { TokenService } from '../shared/api/services';
 
 export function DashboardGuard(redirectRoute: string = ''): CanActivateFn {
   return () => {
-    const canAccess: boolean = true; // Cette valeur sera calculée par le service plus tard
-    const router: Router = inject(Router); // Nous faisons une DI pour récupérer le système de Router
-    return canAccess || router.createUrlTree([redirectRoute]);
+    const tokenService = inject(TokenService);
+    const canAccess: boolean = !tokenService.token$().isEmpty;
+    const routerr: Router = inject(Router); // Nous faisons une DI pour récupérer le système de Router
+    return canAccess || routerr.createUrlTree([redirectRoute]);
   };
 }

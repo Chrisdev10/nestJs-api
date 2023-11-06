@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AppNode } from '@Shared';
 import { ApiURI, ApiResponse, ApiService, TokenService, AddTokenHeaderFn, HttpInterceptorCommonErrorHandlerFn, HttpInterceptorHandlerFn, Token } from '@Shared/api';
 const baseURL: string = environment.apiURL;
-const publicRoute: string[] = [baseURL, `${baseURL}token`, `${baseURL}account`, './assets/i18n/fr.json', './assets/i18n/eb.json'];
+const publicRoute: string[] = [baseURL, `${baseURL}token`, `${baseURL}account`, './assets/i18n/fr.json', './assets/i18n/en.json'];
 export const HttpInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.match(`${baseURL}*`)) {
     req.url.match(`${baseURL}*`);

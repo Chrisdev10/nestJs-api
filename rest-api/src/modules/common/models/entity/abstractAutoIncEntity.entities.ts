@@ -1,10 +1,4 @@
-import {
-  BaseEntity,
-  PrimaryColumn,
-  BeforeInsert,
-  Column,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity, PrimaryColumn, BeforeInsert, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { ulid } from 'ulid';
 import { Audit } from './audit';
 export class AbstractAutoIncEntity extends BaseEntity {
@@ -16,7 +10,7 @@ export class AbstractAutoIncEntity extends BaseEntity {
   id: string;
   @BeforeInsert()
   generate() {
-    this.id = ulid();
+    if (!this.id) this.id = ulid();
   }
   @Column(() => Audit)
   audit: Audit;

@@ -1,1 +1,10 @@
-<p>Mon ID : {{ id }} test signal: {{ member()}}   test computed signal: {{ memberComputedTest()}} service test {{detailTest()}}</p> 
+<div class="memberinfo">
+    <h3>{{ "dashboard-feature.member.title" | translate }}</h3>
+    <ul>
+        <li><span>{{ "dashboard-feature.member.lastname" | translate }} : </span>{{memberInfo?.lastname}}</li>
+        <li><span>{{ "dashboard-feature.member.firstname" | translate }} : </span>{{memberInfo?.firstname}}</li>
+        <li><span>{{ "dashboard-feature.member.email" | translate }} : </span>{{memberInfo?.email}}</li>
+        <li><span>{{ "dashboard-feature.member.phone" | translate }} : </span>{{memberInfo?.phone}}</li>
+        <li><span>{{ "dashboard-feature.member.ddn" | translate }} : </span>{{memberInfo?.birdthdate}}</li>
+    </ul>
+</div>

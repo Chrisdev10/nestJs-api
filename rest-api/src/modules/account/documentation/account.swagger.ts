@@ -1,8 +1,4 @@
-import {
-  ApiOperationOptions,
-  ApiProperty,
-  ApiResponseOptions,
-} from '@nestjs/swagger';
+import { ApiOperationOptions, ApiProperty, ApiResponseOptions } from '@nestjs/swagger';
 export class AccountPayload {
   @ApiProperty()
   username: string;
@@ -12,6 +8,10 @@ export class AccountPayload {
 export const AccountControllerSignup: ApiOperationOptions = {
   summary: 'Signup',
   description: 'Allow user to create an account',
+};
+export const AccountControllerInfo: ApiOperationOptions = {
+  summary: 'account info',
+  description: 'return complete info of the specified account',
 };
 export const AccountResponse200: ApiResponseOptions = {
   status: '2XX',
