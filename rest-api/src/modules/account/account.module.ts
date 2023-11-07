@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { AccountController } from './controllers/account.controller';
 import { AccountService } from './services/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Account, Role } from 'entities';
+import { Role } from 'entities';
+import { Account } from '@common/models'
 import { Repository } from 'typeorm';
 import { RolesService } from './services/roles.service';
 import { TokenModule } from 'modules/token/token.module';

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 export const DashboardRoutes: Routes = [
   {
     path: '',
@@ -7,6 +6,7 @@ export const DashboardRoutes: Routes = [
       import('./router/dashboard-router/dashboard-router.component').then(
         c => c.DashboardRouterComponent
       ),
+      // Settings children allow us to put another router-outlet anchor
     children: [
       {
         path: '',

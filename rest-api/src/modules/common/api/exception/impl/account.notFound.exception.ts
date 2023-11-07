@@ -1,5 +1,5 @@
 import { ApiCodeResponse } from '@common/api/response';
-import { ApiException } from '../api-exception';
+import { ApiException } from '@common/api/exception';
 
 export class AccountNotFoundException extends ApiException {
   constructor() {

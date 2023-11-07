@@ -27,6 +27,11 @@ export class SignInPageComponent {
     });
     handleFormError(this.formGroup, this.errors);
   }
+  /**
+   * convert AbstractControl into formControl
+   * @param key the key name of the FormControl 
+   * @returns FormControl
+   */
   get(key: string): FormControl<any> {
     return this.formGroup.get(key)! as FormControl<any>;
   }

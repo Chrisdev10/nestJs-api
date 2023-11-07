@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Account, Subscription } from 'entities';
+import { Account } from '@common/models';
+import { Subscription } from '@Modules/subscription';
 import { Repository } from 'typeorm';
 import {
   SubScope,
@@ -20,7 +21,6 @@ export class SubscriptionService {
   async createSubscription(payload: SubscriptionPayload) {
     const acc = await this.accRepo.findOneBy({ username: payload.username });
     if (!acc) throw new NotFoundException();
-    //TODO: change the way to attribute right value for sub and scope type
     const sub = this.subsrepo.create(
       Builder<Subscription>()
         .type(SubType[payload.type] === 'P' ? SubType.PREMIUM : SubType.NORMAL)

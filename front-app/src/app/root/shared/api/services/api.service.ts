@@ -32,7 +32,7 @@ export class ApiService {
   private errorHandler(httpError: HttpErrorResponse): ApiResponse {
     return { ...httpError.error, paramError: httpError.status === 499, result: false };
   }
-  private succesHandler(response: Object): ApiResponse {
+  private succesHandler(response: Object): ApiResponse {    
     return { ...(response as ApiResponse), paramError: false, result: true };
   }
 }

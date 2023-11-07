@@ -1,5 +1,4 @@
-import { TokenInvalidException } from '@common/api/exception/impl/token.invalid.exception';
-import { TokenMissingException } from '@common/api/exception/impl/token.missing.exception';
+import { TokenInvalidException, TokenMissingException } from '@common/api/exception/impl';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { isNil } from 'lodash';

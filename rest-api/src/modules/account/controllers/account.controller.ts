@@ -1,10 +1,9 @@
 import { Controller, Post, Get, Query, Param, Delete } from '@nestjs/common';
-import { AccountService } from '../services/account.service';
+import { AccountService } from '@Modules/account';
 import { Body } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AccountControllerInfo, AccountControllerSignIn, AccountControllerSignup, AccountDeleteResponse404, AccountResponse200, AccountSigninResponse400, AccountSignupResponse403 } from '../documentation/account.swagger';
-import { SignInPayload, SignUpFullPayload } from '../models/payload';
-import { Auth } from '@common/decorators/roles.decorator';
+import { SignInPayload, SignUpFullPayload, AccountControllerInfo, AccountControllerSignIn, AccountControllerSignup, AccountDeleteResponse404, AccountResponse200, AccountSigninResponse400, AccountSignupResponse403 } from '@Modules/account';
+import { Auth } from '@common/decorators';
 @ApiBearerAuth('access-token')
 @ApiTags('Account')
 @Controller('account')

@@ -7,7 +7,7 @@ export const securityRoutes: Routes = [
     path: '',
     redirectTo: AppNode.SIGN_IN,
     pathMatch: 'full',
-    // Angular will spill the route path into multiple segment. Each of them will be checked if it s set to full.
+    // Angular will split the route path into multiple segment. Each of them will be checked if it s set to full.
     // if not, it will give the first route who match with even the first segment routes
   },
   {
@@ -18,6 +18,7 @@ export const securityRoutes: Routes = [
       ),
   },
   {
+    // always put fallback at the end. Routes are evaluated in an ordered way from top to bottom
     path: AppNode.FALL_BACK,
     loadChildren: () =>
       import(

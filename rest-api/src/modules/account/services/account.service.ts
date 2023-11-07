@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Account, Person } from 'entities';
+import { Person } from 'entities';
+import { Account } from '@common/models';
 import { Repository } from 'typeorm';
 import { Builder } from 'builder-pattern';
 import { InjectRepository } from '@nestjs/typeorm';

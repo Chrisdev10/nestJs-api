@@ -18,13 +18,14 @@ export class TokenService {
   );
   public setToken(token: Token): void {
     if (token.token.trim().length > 0) {
+      // setter will trigger effect signal
       this.token$.set(token);
     } else {
       this.token$.set(this.getEmpty());
-      localStorage.removeItem(environment.TOKEN_KEY);
     }
   }
   private handleTokenChange(token: Token): void {
+    // once the effect is triggered, we will reflect the changes into localstorage
     if (!token.isEmpty) {
       localStorage.setItem(environment.TOKEN_KEY, JSON.stringify(token));
     } else {
@@ -33,6 +34,7 @@ export class TokenService {
   }
   private getToken(): Token {
     const str = localStorage.getItem(environment.TOKEN_KEY);
+    // if not token stored, we return empty Token to init signal
     return !isNil(str) ? (JSON.parse(str) as Token) : this.getEmpty();
   }
   private getEmpty(): Token {

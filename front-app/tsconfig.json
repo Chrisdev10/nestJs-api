@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    // custom path to make cleaner imports
     "paths":{
       "@Security" : ["src/app/root/security/index.ts"],
       "@Shared" : ["src/app/root/shared/index.ts"],

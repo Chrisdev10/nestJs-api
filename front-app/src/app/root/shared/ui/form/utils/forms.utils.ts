@@ -3,6 +3,11 @@ import { FormGroup, ValidationErrors } from '@angular/forms';
 import { map, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HandleValueChangeFn, FormError, GetAllFormErrorsFn } from '../type';
+/**
+ * Extract error from FormGroup and stored them into arrays
+ * @param form FormGroup instance
+ * @returns Errors array
+ */
 const getFormValidationErrors: GetAllFormErrorsFn = (
   form: FormGroup
 ): FormError[] => {
@@ -23,6 +28,11 @@ const getFormValidationErrors: GetAllFormErrorsFn = (
   });
   return result;
 };
+/**
+ * Error manager. It will store any error into signal and will be evaluated every changes(onChange listener)
+ * @param form 
+ * @param signal 
+ */
 export const handleFormError: HandleValueChangeFn = (
   form: FormGroup,
   signal: WritableSignal<FormError[]>

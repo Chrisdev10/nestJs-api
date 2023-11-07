@@ -1,5 +1,4 @@
-import { AuthGuard } from '@common/guards/auth.guard';
-import { RoleGuard } from '@common/guards/role.guard';
+import { AuthGuard, RoleGuard } from '@common/guards';
 import { SetMetadata, UseGuards, applyDecorators } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 /**

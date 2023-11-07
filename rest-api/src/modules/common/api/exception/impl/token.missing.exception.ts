@@ -1,5 +1,5 @@
-import { ApiException } from '../api-exception';
 import { ApiCodeResponse } from '@common/api/response';
+import { ApiException } from '@common/api/exception';
 
 export class TokenMissingException extends ApiException {
   constructor() {

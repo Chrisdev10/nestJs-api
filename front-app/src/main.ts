@@ -21,9 +21,9 @@ export function createTranslateLoader(http: HttpClient) {
 }
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(withInterceptors([HttpInterceptor])),
-    importProvidersFrom(
+    provideRouter(routes, withComponentInputBinding()), // we set the main routes 
+    provideHttpClient(withInterceptors([HttpInterceptor])), // make httpclient enable for injection and add our interceptor on it
+    importProvidersFrom( // enable translation module. loader load the file. compiler add more feature to it(plural)
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,

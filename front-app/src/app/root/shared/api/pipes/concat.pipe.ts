@@ -7,6 +7,7 @@ import { FormError } from '../../ui/form/type';
 })
 export class ConcatPipe implements PipeTransform {
   transform(value: string, args: FormError): string {
+    // simple concatenation to make output string matching the i18n keys
     return value.concat(`${args.control}-${args.error}`);
   }
 }

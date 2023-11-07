@@ -3,6 +3,7 @@
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="error-area" *ngIf="errors().length >0">
         <p>{{'security-feature.sign-in-page.error.description' | translate: {count: errors().length} }}</p>
+        <!-- Each error will be first formated by concat pipe before beeing translated -->
         <p *ngFor="let error of errors()">{{'security-feature.sign-in-page.error.' | concat: error | translate}}</p> 
       </div>
       <app-label-input [control]="get('username')" [label]="userNameLabel"></app-label-input>

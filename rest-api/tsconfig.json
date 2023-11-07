@@ -11,7 +11,8 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths":{
-      "@common/*": ["./modules/common/*"]
+      "@common/*": ["./modules/common/*"],
+      "@Modules/*": ["./modules/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
