@@ -1,5 +1,5 @@
 import { Controller, Post, Get, Query, Param, Delete } from '@nestjs/common';
-import { AccountService } from '@Modules/account';
+import { AccountControllerDelete, AccountDelete200, AccountService } from '@Modules/account';
 import { Body } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SignInPayload, SignUpFullPayload, AccountControllerInfo, AccountControllerSignIn, AccountControllerSignup, AccountDeleteResponse404, AccountResponse200, AccountSigninResponse400, AccountSignupResponse403 } from '@Modules/account';
@@ -38,7 +38,9 @@ export class AccountController {
   async getUserInfo(@Param('id') id: string) {
     return this.accountService.getUserInfo(id);
   }
+  @ApiOperation(AccountControllerDelete)
   @ApiResponse(AccountDeleteResponse404)
+  @ApiResponse(AccountDelete200)
   @Auth('ADMIN')
   @Delete(':username')
   async removeAccountByUsername(@Param('username') username: string) {

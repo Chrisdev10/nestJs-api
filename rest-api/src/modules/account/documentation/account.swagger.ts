@@ -13,9 +13,17 @@ export const AccountControllerInfo: ApiOperationOptions = {
   summary: 'account info',
   description: 'return complete info of the specified account',
 };
+export const AccountControllerDelete: ApiOperationOptions = {
+  summary: 'remove specified account',
+  description: 'remove account based on username',
+};
 export const AccountResponse200: ApiResponseOptions = {
   status: '2XX',
   description: 'return token',
+};
+export const AccountDelete200: ApiResponseOptions = {
+  status: '2XX',
+  description: 'account deleted',
 };
 export const AccountSignupResponse403: ApiResponseOptions = {
   status: '4XX',
