@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { TokenService } from '../services/token.service';
-import { payloadJWT } from '../payload/payload.token';
+import { TokenService, payloadJWT } from '@Modules/token';
 
 @Controller('token')
 export class TokenController {

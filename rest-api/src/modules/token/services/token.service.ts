@@ -1,8 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { payloadJWT } from '../payload/payload.token';
+import { payloadJWT } from '@Modules/token/payload';
 import { TokenInvalidException } from '@common/api';
-import { log } from 'console';
 
 @Injectable()
 export class TokenService {
@@ -29,6 +28,7 @@ export class TokenService {
       secret: process.env.JWT_SECRET,
     });
   }
+  // return a brand new token
   async refreshToken(token: string) {
     try {
       const info: payloadJWT = (await this.jwtService.verifyAsync(token, {
